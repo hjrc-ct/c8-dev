@@ -1,0 +1,32 @@
+[
+    {
+    "id": 0,
+    "src": "pages/c8-k8s-header.jpeg",
+    "title": "Sign-In to start your <u>c8-labs</u> now !",
+    "subtitle": "",
+    "alt": "Access granted to GCP Project c8-labs",
+    "duration": 3000,
+    "link": "/labs/gcp-access",
+    "category": "Getting Started"
+  },
+  {
+    "id": 0,
+    "src": "pages/camunda-logo.jpeg",
+    "title": "Sign-In to start your <u>c8-labs</u> now !",
+    "subtitle": "",
+    "alt": "Sign-In to start your <u>c8-labs</u> now !",
+    "duration": 3000,
+    "link": "/labs/gcp-access",
+    "category": "Getting Started"
+  },
+  {
+    "id": 1000,
+    "src": "pages/makelabs.png",
+    "title": "Powered by MakeLabs",
+    "subtitle": "Built for the Camunda community",
+    "alt": "Managed by MakeLabs.in and Community Chapter Bengaluru",
+    "duration": 8000,
+    "link": "/about",
+    "category": "About"
+  }
+]

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Hands-on labs to learn Camunda 8 development." />
+    <meta name="keywords" content="Camunda 8, Camunda self-managed, Camunda Kubernetes, Zeebe, GKE, Kubernetes labs, workflow automation, BPMN, DevOps training" />
+    <meta name="author" content="MakeLabs.in & Camunda Community Chapter Bengaluru" />
+
+    <meta http-equiv="Content-Security-Policy"
+    content="
+    default-src 'self';
+    base-uri 'none';
+    object-src 'none';
+    frame-ancestors 'none';
+    frame-src https://challenges.cloudflare.com;
+    form-action 'self';
+
+    script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://cdnjs.cloudflare.com;
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com;
+
+    img-src 'self' data: https:;
+    font-src 'self' https: data:;
+    media-src 'self' https://videos-c8-labs.makelabs.in;
+    connect-src 'self' https://static.cloudflareinsights.com  https://challenges.cloudflare.com https://cep-api-gw-7k5bxais.an.gateway.dev https://c8-labs.makelabs.in https://cdnjs.cloudflare.com;
+    child-src https://challenges.cloudflare.com;
+    worker-src 'self' blob:;
+    ">
+
+    <title>C8 Dev Labs | Camunda 8 Development / GCP</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header id="header">
+        <a href="#welcome" class="skip-to-content" id="skip-to-content">Skip to main content</a>
+        <div id="header-content"></div>
+    </header>
+    <main>
+        <div id="app-layout">
+        <nav>
+            <ul>
+                <li><a href="pages/Part0.html">Start Here</a></li>
+                <li><hr class="nav-separator"></li>
+                <li><a href="pages/Part7.html">My Keys<sup>&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
+  <path d="M6 10V7a6 6 0 1 1 12 0v3" stroke="#222" stroke-width="2" fill="none"/>
+  <rect x="4" y="10" width="16" height="10" rx="2" stroke="#222" stroke-width="2" fill="none"/>
+  <circle cx="12" cy="15" r="2" stroke="#222" stroke-width="2" fill="none"/>
+</svg></sup></a></li>
+                <li><hr class="nav-separator"></li>
+                <li><a href="pages/Part7.html">Payment<sup>&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
+  <path d="M6 10V7a6 6 0 1 1 12 0v3" stroke="#222" stroke-width="2" fill="none"/>
+  <rect x="4" y="10" width="16" height="10" rx="2" stroke="#222" stroke-width="2" fill="none"/>
+  <circle cx="12" cy="15" r="2" stroke="#222" stroke-width="2" fill="none"/>
+</svg></sup></a></li>
+            </ul>
+        </nav>
+        <main id="main-content">
+        </main>
+        </div>
+    </main>
+    <footer id="footer"></footer>
+    <script src="scripts/app.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        function clearClientCache() {
+            try {
+                if ('caches' in window) {
+                    caches.keys().then((cacheNames) => {
+                        Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)));
+                    });
+                }
+            } catch (error) {
+                console.warn('Unable to clear browser caches:', error);
+            }
+
+            try {
+                sessionStorage.clear();
+                localStorage.clear();
+            } catch (error) {
+                console.warn('Unable to clear browser storage:', error);
+            }
+        }
+
+        function signOutAndRedirect() {
+            clearClientCache();
+            window.location.replace('/cdn-cgi/access/logout');
+        }
+
+        function getSelectedNS() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('ns')) {
+                return urlParams.get('ns') ;
+            }
+            return "";
+        }
+        document.addEventListener('DOMContentLoaded', async function () {
+            const headerContent = document.getElementById('header-content');
+            if (!headerContent) return;
+
+            const tValue = await getMyAccessToken();
+            const hasAccess = !!(tValue);
+            const hasAccessV2 = hasAccess ? !!(getEmailFromAccessJwt(tValue)) : hasAccess;
+            const nsValue = getSelectedNS();
+
+            let namespaceMenuMarkup = "";
+            if (nsValue) {
+                namespaceMenuMarkup = `
+                    <div class="namespace-menu">
+                        <input type="hidden" id="user-namespace" name="user-namespace" value="${nsValue}" />
+                        <button id="namespace-menu-toggle" class="namespace-menu-toggle" type="button" aria-expanded="false" aria-controls="namespace-menu-panel">
+                            <span>My Namespace: ${nsValue}</span>
+                            <span class="namespace-caret">▾</span>
+                        </button>
+                        <div id="namespace-menu-panel" class="namespace-menu-panel" hidden>
+                            <a href="#" onclick="copyNamespace(); return false;">
+                                <i class="fa-regular fa-copy"></i>
+                                Copy My Namespace
+                            </a>
+                            <a href="https://dashboard-c8-labs.makelabs.in" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-solid fa-cubes"></i>
+                                Visit Kubernetes Dashboard
+                            </a>
+                            <a href="https://${nsValue}.makelabs.in" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-solid fa-globe"></i>
+                                Your C8 Landing Page
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            headerContent.innerHTML = 
+                        namespaceMenuMarkup +
+                        // '<div class="header-scroll">' +
+                        // '<div class="header-button-list">' +
+                            '<a id="header_home" onclick="window.location.href = window.location.pathname;">Home</a>' +
+                            '<a id="header_support" onclick="loadCoursePart(11, true);">Support</a>' +
+                            '<a id="header_faq" onclick="loadCoursePart(12, true);">FAQ</a>' +
+                            '<a id="header_contact" onclick="loadCoursePart(0, true);">Contact</a>' +                            
+                            (hasAccessV2 
+                                ? '<button id="logout" class="request-access-btn" type="button" onclick="signOutAndRedirect()"><i class="fa-solid fa-right-from-bracket">&nbsp;</i>Sign Out</button>' 
+                                : '<button id="request-access-btn" class="request-access-btn" type="button"><i class="fa-solid fa-right-to-bracket">&nbsp;</i>Sign In</button>'
+                                
+                            )
+                        //+ '</div>'
+                        //+ '</div>'
+                        ;
+
+            const namespaceToggle = document.getElementById('namespace-menu-toggle');
+            const namespacePanel = document.getElementById('namespace-menu-panel');
+            if (namespaceToggle && namespacePanel) {
+                namespaceToggle.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const isExpanded = namespaceToggle.getAttribute('aria-expanded') === 'true';
+                    namespaceToggle.setAttribute('aria-expanded', String(!isExpanded));
+                    namespacePanel.hidden = isExpanded;
+                });
+
+                namespacePanel.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
+
+                document.addEventListener('click', () => {
+                    namespaceToggle.setAttribute('aria-expanded', 'false');
+                    namespacePanel.hidden = true;
+                });
+            }
+
+            // video menu toggle and panel
+            const videoToggle = document.getElementById('video-menu-toggle');
+            const videoPanel = document.getElementById('video-menu-panel');
+            if (videoToggle && videoPanel) {
+                videoToggle.addEventListener('click', (event) => {
+                    console.log("video toggle clicked");
+                    event.stopPropagation();
+                    const isExpanded = videoToggle.getAttribute('aria-expanded') === 'true';
+                    videoToggle.setAttribute('aria-expanded', String(!isExpanded));
+                    videoPanel.hidden = isExpanded;
+
+                    console.log("videoPanel.hidden = ", isExpanded);
+                });
+
+                videoPanel.addEventListener('click', (event) => {
+                    console.log("video panel clicked");
+                    event.stopPropagation();
+                });
+
+                document.addEventListener('click', () => {
+                    videoToggle.setAttribute('aria-expanded', 'false');
+                    videoPanel.hidden = true;
+                });
+            }
+
+            const requestAccessButton = document.getElementById('request-access-btn');
+            if (requestAccessButton) {
+                requestAccessButton.addEventListener('click', () => {
+                    window.location.href = '/signin';
+                });
+            }
+
+            // attach magnifier to one key element
+            if (false){
+                    const hero = document.querySelector(".app-page-header-item-right");
+                    const bg = document.querySelector(".app-page-header-item-right-animate");
+                    const lens = document.getElementById("magnifier");
+
+                    hero.addEventListener("mouseenter", () => {
+                        lens.style.display = "block";
+                    });                        
+
+                    hero.addEventListener("mouseleave", () => {
+                        lens.style.display = "none";
+                    });
+
+                    hero.addEventListener("mousemove", (e)=>{
+
+                        if (true) {
+                            const rect = hero.getBoundingClientRect();
+
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+
+                            lens.style.left = (x-80)+"px";
+                            lens.style.top  = (y-80)+"px";
+
+                            // copy the animated background
+                            lens.style.backgroundImage =
+                                getComputedStyle(bg).backgroundImage;
+
+                            const zoom = 1.75;
+
+                            const bgWidth = rect.width * zoom;
+                            const bgHeight = rect.height * zoom;
+
+                            lens.style.backgroundSize = `${bgWidth}px ${bgHeight}px`;
+
+                            lens.style.backgroundPosition =
+                                `${-(x * zoom - lens.offsetWidth / 2)}px
+                                ${-(y * zoom - lens.offsetHeight / 2)}px`;
+                        }
+
+                    });
+            }
+
+            // logic to show images on hero page - right side of the header
+            const response = await fetch("pages/gallery.json");
+            const imagesGallery = await response.json();
+
+            const slide = document.querySelector(".app-page-header-item-right-animate");
+            if(!slide) return;
+            const slideCaption = document.querySelector(".animate-image-caption");
+            if(!slideCaption) return;
+
+            let current = 0;
+
+            slide.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.14), rgba(255,255,255,1.0)),url(${imagesGallery[current].src})`;
+            slide.classList.add("active");
+            slideCaption.classList.add("active");
+            slideCaption.innerHTML = getContent( imagesGallery[current] );
+
+            setInterval(() => {
+                slide.classList.remove("active");
+                slideCaption.classList.remove("active");
+
+                const buttonInput = document.getElementById('play_or_pause');
+                const buttonPlay  = document.getElementById('pauseButton');
+                
+                if (!buttonPlay || !buttonInput) return;
+
+                console.log('button play value ', buttonPlay.value);
+
+                if (buttonInput.value.indexOf("true") >= 0 ) {
+                    console.log('continue to play the animate image ' + current);
+                    buttonPlay.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                    buttonPlay.title = `${(1+current)} of ${imagesGallery.length} Click to Pause`;
+                    // show the pause button continue as usual
+                } else {
+                    console.log('no action - stop play the animate image ' + current);
+                    buttonPlay.innerHTML = '<i class="fa-solid fa-play"></i>';
+                    buttonPlay.title = `${(current)+1} of ${imagesGallery.length} Click to Play`;
+
+                    // at this time, show skip to main content
+                    
+                    const skipToContent  = document.getElementById('skip-to-content');
+                    if(skipToContent){ 
+                        skipToContent.style.transform = "translateY(0)";
+
+                        skipToContent.addEventListener('click', () => {
+                            skipToContent.hidden = true;
+                        });
+                    }
+
+                    return;
+                }
+
+                setTimeout(() => {
+                    
+                    current = (current + 1) % imagesGallery.length;
+                    if (current === 0) current = 1;
+
+                    buttonPlay.title = `${(current)+1} of ${imagesGallery.length}`;
+
+                    if ( current === 0 || current + 1 === imagesGallery.length ) // gradient only for 1st image or last
+                        slide.style.backgroundImage =
+                                        `linear-gradient(rgba(255,255,255,0.14),
+                                                        rgba(255,255,255,1.0)),
+                                         url(${imagesGallery[current].src})`;
+                    else
+                        slide.style.backgroundImage = `url(${imagesGallery[current].src})`;
+
+                    const textSlideNumber = document.getElementById('currentSlideNumber');
+                    if (textSlideNumber) textSlideNumber.innerHTML = `#${1+current}`;
+
+                    slideCaption.innerHTML = getContent( imagesGallery[current] ); 
+                    slide.classList.add("active");
+                    slideCaption.classList.add("active");
+                    
+                }, 2*1000);
+
+            }, imagesGallery[current].duration < 6000 ? 6000 : imagesGallery[current].duration );
+        });
+    </script>
+</body>
+</html>

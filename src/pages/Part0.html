@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <main id="page-start">
+        <section id="welcome">
+            <small>An initiative of the Community Chapter Bengaluru</small>
+            <h2>
+                Welcome !
+            </h2>
+            <div class="welcome-block">
+            <div class="welcome-text">
+                C8-Labs is a hands-on learning platform for Camunda 8 Self-Managed on Kubernetes. In this self-paced program, you'll build and operate a complete Camunda 8 environment in a dedicated namespace within a Google Kubernetes Engine (GKE) cluster through guided labs.
+                Each exercise includes detailed instructions, validation steps, and real-world scenarios to help you gain practical experience.
+                Whether you're new to Camunda 8 or preparing for real-world deployments, C8-Labs provides a structured environment to learn by doing.
+            </div>
+            </div>
+         
+        <hr/>
+        <section id="lab-gallery">
+            <div class="section-header-row">
+                <div>
+                    <h2>Lab Gallery</h2>
+                    <p>Visual summary of lab steps and environment snapshots from the course are presented below.
+                        <br/>Click on any of the image(s) to begin Gallery View.
+                    </p>
+                </div>
+            </div>
+            <div class="lab-gallery">
+                <!-- added by script loadGallery -->
+            </div>
+            <div id="gallery-modal" class="gallery-modal-overlay" hidden>
+                <div class="gallery-modal">
+                    <div class="gallery-modal-caption">
+                        <span id="gallery-modal-counter"></span>
+                        <span id="gallery-modal-description"></span>
+                        <button id="gallery-modal-close" type="button" aria-label="Close gallery">✕</button>
+                    </div>
+                    <div class="gallery-modal-body">
+                        <button id="gallery-modal-prev" type="button" class="gallery-modal-nav">←</button>
+                        <img id="gallery-modal-image" src="" alt="Gallery image">
+                        <button id="gallery-modal-next" type="button" class="gallery-modal-nav">→</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br/>
+        <a href="#welcome" class="quick-link-pill-small">Return to top</a>
+        <br/><br/>
+        <hr/>
+        <section id="course-summary">
+            <h2>
+                Course Summary
+            </h2>
+            <table class="course-summary-table" style="width: 75%; border-collapse: collapse; border: 1px solid #e9ecef;">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: gray;text-align: end;">Platform</td>
+                        <td style="text-align: left;">Camunda 8 Self-Managed</td>
+                    </tr>
+                    <tr>
+                        <td style="color: gray;text-align: end;">Deployment</td>
+                        <td style="text-align: left;">Kubernetes Engine on Google Cloud (GKE)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: gray;text-align: end;">Learning Style</td>
+                        <td style="text-align: left;">Guided Hands-on Labs</td>
+                    </tr>
+                    <tr>
+                        <td style="color: gray;text-align: end;">Experience Level</td>
+                        <td style="text-align: left;">Skilled in Camunda. Basic DevOps knowledge.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: gray;text-align: end;">Estimated Duration</td>
+                        <td style="text-align: left;">
+                            Refer to section <code>Access Plans</code> for details.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: gray;text-align: end;">Lab Environment</td>
+                        <td style="text-align: left;">Each participant gets their own namespace on pre-configured GKE cluster</td>
+                    </tr>
+                    <tr>
+                        <td style="color: gray; text-align: end;">Validation</td>
+                        <td style="text-align: left;">Documentation provided to check after each exercise / command-set execution</td>
+                    </tr>
+                    <tr>
+                        <td style="color: gray; text-align: end;">Prerequisites</td>
+                        <td style="text-align: left;">Basic Kubernetes, command-line and Camunda knowledge</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <a href="#welcome" class="quick-link-pill-small">Return to top</a>
+        </section>
+        <hr/>
+        <section id="what-you-learn">
+            <h2>
+                What You'll Learn / Do
+            </h2>
+            <p>
+                By the end of the labs, you'll be able to:
+                <ul>
+                    <li>Deploy Camunda 8 on Kubernetes/GCP</li>
+                    <li>Inside view of Kubernetes objects and Topology</li>
+                    <li>Deploy and operate Zeebe Orchestration, Operate, Tasklist, Identity, Optimize, and Connectors</li>
+                    <li>Monitor workloads using Prometheus and Grafana</li>
+                    <li>Troubleshoot deployment issues</li>
+                    <li>Scale and manage Camunda components</li>
+                </ul>
+                There are a <code>few advanced lab exercises</code> included in this program.
+                <ul>
+                    <li>Increase the partition count of the Zeebe cluster</li>
+                    <li>Review the persistent volume file system structure</li>
+                    <li>Pause and resume the exporter and monitor the indicators in Grafana</li>
+                    <li>Generate a burst of transaction volume while the exporter is paused</li>
+                </ul>
+            </p>
+            <br/>
+            <a href="#welcome" class="quick-link-pill-small">Return to top</a>
+        </section>
+        <hr/>
+        <section id="course-is-for">
+            <h2>
+                Who Should Attend?
+            </h2>
+            <p>
+                This lab is ideal for:
+                <ul>
+                    <li>Camunda Developers</li>
+                    <li>Solution Architects</li>
+                    <li>DevOps Engineers</li>
+                    <li>Migrating from Camunda 7 to Camunda 8</li>
+                    <li>Camunda 8 Upskill</li>
+                </ul>
+            </p>
+            <br/>
+            <a href="#welcome" class="quick-link-pill-small">Return to top</a>
+        </section>        
+        <hr/>
+        <section id="access-plans">
+            <h2>
+                Access Plans
+            </h2>
+            <p>
+                This table compares what participants receive under the Free and Premium tiers. It highlights the key differences in access, duration, support, and learning experience so the plan choices are easy to scan.
+            </p>
+            <p>
+            <table class="course-summary-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Free Tier</th>
+                        <th>Premium Tier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Eligibility</b>
+                            <br/>
+                            <small>Criteria to access this platform</small>
+                        </td>
+                        <td>
+                            <div class="info-callout">
+                                <div class="info-callout-title">⚠️ Attention Members!</div>
+                                <div><b>September 03rd 2026</b><br/>Next Bengaluru Chapter event!</div>
+                                
+                            </div>
+                            <ul style="list-style: none; padding-top: 0; padding-left: 0;">
+                                    <li>Members of&nbsp;<a target="_blank" href="https://community.camunda.com/camunda-chapter-bengaluru/">Camunda Community Chapter Bengaluru</a></li>
+                                    <li>Scheduled Camunda Community events</li>
+                                </ul>
+                        </td>
+                        <td>
+                            <ul style="list-style: none; padding-top: 0; padding-left: 0;">
+                                <li style="color: rgb(6, 147, 227);"><b>Paid subscription</b></li>
+                                <li style="color: black"><b>₹1,999 / $19</b></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>How to Register?</b>
+                            <br/>
+                            <small>
+                                A simple registration process.<br/>
+                                Use Sign In button to begin.
+                            </small>
+                        </td>
+                        <td>
+                            Request for access granted instantly.
+                            <br/>
+                            Click on <code>Sign In</code> to begin.<br/>
+                            Select Email/OTP method.<br/>
+                            Follow the on-screen navigation.
+                            <br/><br/>
+                            <small>Note: This option is enabled only during active community events.</small>
+                        </td>
+                        <td>
+                            Online purchase.
+                            <br/>
+                            Click on <code>Sign In</code> to begin.<br/>
+                            Select Google Identity.<br/>
+                            Follow the on-screen navigation.
+                            <br/><br/>
+                            <small>
+                                ETA for onboarding: <code>~5 minutes</code>
+                            </small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Lab Access Duration</b>
+                            <br>
+                            <small>Time starts when user completes Onboarding instructions. See navigation link.<br/>Continuous hours, can't be divided into multiple time-windows.</small>
+                        </td>
+                        <td><b>6 Hours</b></td>
+                        <td><b>48 Hours</b></td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Lab Access Method</b>
+                            <br>
+                            <small>How does the user access the labs?</small>
+                        </td>
+                        <td>
+                            Use the <b style="color: #e8491d;">Sign In</b> button and enter your email using <b>Email/OTP</b> method.
+                            Enter the OTP sent to your email and you'll be taken directly to your hands-on lab.
+                            <br/>
+                            <small>
+                                <br/>
+                                Note: After you Sign In, the session is valid for the period mentioned in <b>Lab Access Duration</b>. 
+                                Please do not Sign Out during the lab access window.
+                            </small>
+                        </td>
+                        <td>
+                            Use the <b style="color: #e8491d;">Sign In</b> button and select <b>Google or LinkedIn</b> as Identity provider.
+                            <br/><br/><br/>
+                            <small>
+                                Payment integrated with the web portal. You get instant access upon successful onboarding.
+                                <br/>
+                                Note: After you Sign In, the session is valid for the period mentioned in <b>Lab Access Duration</b>. If you Sign Out, you may Sign In again within the <i>access window</i> and continue from where you left off.<br/>
+                            </small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Lab Access Email Communication</b>
+                            <br><br/>
+                            <small>
+                                Emails sent by the system during the access window.<br/>
+                                Look for emails from <b>contact-at-makelabs.in</b>.<br/>
+                                Check your spam folder if you don't see any emails in your inbox.<br/>
+                                Refer to FAQ for more details on email communication.
+                            </small>
+                        </td>
+                        <td>
+                            Yes<br/><br/>
+                            <small>
+                                Emails sent by the system during the access window.<br/>
+                                Onboarding emails: One email per onboarding session.<br/>
+                                Lab Usage Report: Sent once every two hours during the lab access window.<br/>
+                            </small>
+
+                        </td>
+                        <td>
+                            Yes<br/><br/>
+                            <small>
+                                Emails sent by the system during the access window.<br/>
+                                Onboarding emails: One email per onboarding session.<br/>
+                                Lab Usage Report: Sent every six hours (i.e., 4 times per calendar day).<br/>
+                            </small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Participant Access to GCP Project</b>
+                            <br/>
+                            <small>
+                                For security reasons, the participant can see the project via GCP web ui console and open Cloud Shell terminal session.
+                                <br/>Beyond that, there won't be much access given. (Note: Not having deeper project access will not limit the execution of labs)
+                            </small>
+                        </td>
+                        <td>
+                            Limited
+                            <br/>
+                            <br/>
+                            <small>
+                                If you try to visit project resources such as Kubernetes Engine, IAM etc, you may see a message: You do not have access.
+                                Please ignore this, as limiting access is by design.
+                            </small>
+                        </td>
+                        <td>
+                            Limited
+                            <br/>
+                            <br/>
+                            <small>
+                                If you try to visit project resources such as Kubernetes Engine, IAM etc, you may see a message: You do not have access.
+                                Please ignore this, as limiting access is by design.
+                            </small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Participant Access to Kubernetes Dashboard</b>
+                            <br/>
+                            <small>
+                                Access to see resources within participant namespace.
+                                <br/>
+                            </small>
+                        </td>
+                        <td>
+                            Below methods are available.
+                            <br/><br/>
+                            Kubectl CLI commands via GCP Cloud Shell terminal window
+                            <br/><b>Yes</b>
+                            <br/><br/>
+                            Headlamp Kubernetes Dashboard UI
+                            <br/><b>Limited "view-only" access</b>
+                            <br/><br/>
+                            <small>
+                                Headlamp Web UI is installed and preconfigured so participant can <code>view</code> objects in the participant specific namespace.
+                                <br/>You may not be able to open terminal session with Pods or view Pod logs due to limited access given to the participant.
+                                <br/>As an alternate, you may use the Kubectl CLI commands.
+                            </small>
+                        </td>
+                        <td>
+                            Below methods are available.
+                            <br/><br/>
+                            Kubectl CLI commands via GCP Cloud Shell terminal window
+                            <br/><b>Yes</b>
+                            <br/><br/>
+                            Headlamp Kubernetes Dashboard UI
+                            <br/><b>Limited "view-only" access</b>                            
+                            <br/><br/>
+                            <b>[Recommended]</b> Install Project Lens UI
+                            <br/><b>Full access to your namespace</b>
+                            <br/><br/>
+                            <small>
+                                Participant to install Project Lens UI app on their local machine (Refer to Prerequisites section in Navigation panel). 
+                                Using Project Lens, you can <code>edit</code> (i.e., see and make changes to the) kubernetes objects in your assigned namespace.
+                                Recommended for gaining a deeper understandng of the physical architecture and infrastructure setup.
+                            </small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Complete All Labs</b>
+                            <br/>
+                            <small>We make best possible attempt to complete all labs in the course.</small>
+                        </td>
+                        <td>Depending on pace</td>
+                        <td>
+                            Yes
+                            <br/><br/>
+                            <small>
+                                In case of technical issues on the platform, we'll ensure another session at a later date is arranged to make for lost time (only one extension allowed, within 15 days).
+                                <br/>Network connectivity and bandwidth is user's responsibility.
+                                <br/>User to submit a request via email or WhatsApp with evidence of technical errors with the Kubernetes cluster or GCP console. Our team will review and respond within 24 hours.
+                            </small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Self-paced Learning</b>
+                        </td>
+                        <td>
+                            ✓<br/><small>Sign In is allowed only once</small>
+                        </td>
+                        <td>
+                            ✓<br/><small>Sign In any number of times during lab access window</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Resume Later</b>
+                        </td>
+                        <td>
+                            No
+                        </td>
+                        <td>
+                            ✓<br/><small>Sign In any number of times during lab access window</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Hands-on Exercises</b>
+                        </td>
+                        <td>Limited</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Labs Support</b>
+                            <br/><small> Refer to <code>Support</code> navigation link for details.</small>
+                        </td>
+                        <td>Limited<br/><small>Join WhatsApp group for community support.</small></td>
+                        <td>
+                            ✓<br/><small>Support via Microsoft Teams chat or Google chat or WhatsApp chat.</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="access-plan-label">
+                            <b>Ideal For</b>
+                        </td>
+                        <td>Workshop attendees</td>
+                        <td>Deep learning & practice</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <a href="#welcome" class="quick-link-pill-small">Return to top</a>
+        </section>
+        <hr/>
+        <section id="get-started">
+            <h2>
+                Get Started
+            </h2>
+            <p>
+                Choose the option that matches how you’d like to access the labs. Refer to <code>Access Plans</code> section above to know the scope of what is covered under each plan.
+                <ul>
+                    <li>
+                        <b>Free Tier – During Community Events</b>
+                        <br/>
+                        Start your 6-hour hands-on lab. Free Tier is applicable during select time intervals - such as Community Events. No waiting, no manual approval.
+                        Use the <b style="color: #e8491d;">Sign In</b> button and verify your email with a one-time password (OTP). 
+                        <br/>
+                    </li>
+                    <li>
+                        <b>Premium Tier – Start Any Day / Any Time</b>
+                        <br/>
+                        Online purchase available. Web portal navigates the user with instructions for payment. After making the payment, in a matter of seconds, you get instant access to the learning platform. No manual intervention required!
+                        Use the <b style="color: #e8491d;">Sign In</b> button and Google as Identity Provider.
+                        <br/><br/>
+                        If you still have any questions, please schedule a brief Microsoft Teams introductory session and let us assist you with the enrollment process.
+                        <br/><br/>
+                        <a target="_blank" class="quick-link-pill-top-cta-primary" href='https://outlook.office.com/book/BengaluruChapterAccesstoCamundaKubernetesPlayground@makelabs.in/?ismsaljsauthenabled'>
+                            Talk To Us
+                        </a>
+                    </li>
+                </ul>
+            </p>
+            <br/>
+            <a href="#welcome" class="quick-link-pill-small">Return to top</a>
+        </section>
+        <hr/>
+        <section id="need-help">
+            <h2>
+                Need Help?
+            </h2>
+            <p>
+                If you have any questions or need assistance, please reach out to us through the following channels:
+                <ul>
+                    <li>
+                        <a class="app-link" href="mailto:contact@makelabs.in" target="_blank">
+                            <span class="link-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2" y="2" width="20" height="20" rx="4" fill="#6264A7"/>
+                                    <path d="M8 7h8v2H8V7zm0 4h8v2H8v-2zm0 4h5v2H8v-2z" fill="#fff"/>
+                                    <path d="M16 7h2v10h-2V7z" fill="#fff" opacity="0.5"/>
+                                </svg>
+                            </span>
+                            Email: contact-at-makelabs.in
+                        </a>
+                    </li>
+                    <li>
+                        <a class="app-link" href="https://wa.me/919353800430" target="_blank">
+                            <span class="link-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2" y="2" width="20" height="20" rx="6" fill="#25D366"/>
+                                    <path d="M8.7 7.6c.3 0 .6.1.8.2.2.1.4.4.4.7.1.4.1.9 0 1.4-.1.4-.6 1.1-.7 1.2-.2.1-.4.1-.6.1-.2 0-.3 0-.5-.1-.1-.1-.6-.3-1-.6-.5-.4-.8-.9-1-1.4-.2-.5-.2-.9-.1-1.4.1-.6.3-1 .6-1.4.2-.3.5-.4.9-.5.2 0 .4-.1.5-.1z" fill="#fff" opacity="0.9"/>
+                                    <path d="M10.7 9.7c-.7-.4-1.2-.3-1.5-.2-.2.1-.4.3-.5.4-.2.2-.3.4-.3.6 0 .2 0 .4.1.6.1.2.1.4.3.5.1.1.3.2.4.2.1 0 .2 0 .3-.1.1 0 .1-.1.2-.1.1-.1.2-.2.3-.3.2-.2.4-.3.6-.4.2-.1.4-.2.7-.1.2 0 .4 0 .6.1.2.1.4.3.6.4.2.2.4.4.5.6.1.3.2.5.2.7 0 .2 0 .4-.1.6-.1.1-.1.3-.3.4-.2.1-.4.2-.6.2h-.1c-.2 0-.4 0-.6-.1-.2 0-.4-.1-.5-.2-.2-.1-.3-.3-.4-.4-.1-.2-.2-.3-.2-.5 0-.2.1-.4.1-.6 0-.2.1-.4.2-.5.1-.2.4-.3.6-.4.1 0 .2 0 .4-.1.1 0 .2 0 .3 0 .1 0 .2 0 .2.1.1.1.1.1.1.2 0 .1 0 .2-.1.3 0 .1-.1.1-.2.2z" fill="#fff"/>
+                                </svg>
+                            </span>
+                            WhatsApp +91 9353 800 430
+                        </a>
+                    </li>
+                    <li>
+                        <a class="app-link" href="https://teams.microsoft.com/l/chat/0/0?users=raghu@makelabs.in&message=Hello%20Raghu%20Need%20assistance%20with%20an%20issue%20in%20c8-labs" target="_blank">
+                            <span class="link-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2" y="2" width="20" height="20" rx="4" fill="#6264A7"/>
+                                    <path d="M8 7h8v2H8V7zm0 4h8v2H8v-2zm0 4h5v2H8v-2z" fill="#fff"/>
+                                    <path d="M16 7h2v10h-2V7z" fill="#fff" opacity="0.5"/>
+                                </svg>
+                            </span>
+                            Open Teams Chat
+                        </a>
+                    </li>
+                    <li>
+                        <a class="app-link" href="https://chat.google.com/" target="_blank">
+                            <span class="link-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 4h16v12H8l-4 4V4z" fill="#00a884"/>
+                                    <path d="M6 6h12v2H6V6zm0 4h12v2H6v-2z" fill="#fff"/>
+                                </svg>
+                            </span>
+                            Open Google Chat
+                        </a>&nbsp;raghavendra.chari at gmail.com
+                    </li>
+                </ul>
+            </p>
+            <br/>
+            <a href="#welcome" class="quick-link-pill-small">Return to top</a>
+        </section>
+
+        <hr/>
+
+        <section id="about">
+            <h2>
+            Usage Policy and Educational Use Notice
+            </h2>
+<b>c8-labs</b> is an independent learning platform created to provide hands-on experience with modern cloud-native technologies and workflow orchestration.
+The learning content may include references to third-party technologies, product names, logos, trademarks, documentation, user interfaces, and screenshots solely for educational, instructional, and interoperability purposes. 
+<br/><br/>
+All trademarks, logos, and other intellectual property remain the property of their respective owners. Their inclusion does not imply endorsement, sponsorship, or affiliation with <b>c8-labs</b> or <b>MakeLabs.in</b> unless expressly stated.
+Participants are expected to use the platform responsibly and only for the intended learning activities. Any temporary cloud resources, credentials, or access provided as part of a lab must not be used for purposes outside the scope of the workshop or training.
+
+            <h3>
+                Acknowledgements
+            </h3>
+            The c8-labs learning platform has been made possible by the technologies, open-source projects, and cloud services provided by the following organizations and communities.
+            We gratefully acknowledge:
+            <ul>
+                <li>Camunda – Workflow orchestration platform and BPMN/DMN ecosystem.</li>
+                <li>Google Cloud Platform (GCP) – Cloud infrastructure and managed Kubernetes environment.</li>
+                <li>Kubernetes – Container orchestration platform.</li>
+                <li>Helm – Kubernetes package manager.</li>
+                <li>Cloudflare – DNS, SSL, and edge networking services.</li>
+                <li>Grafana – Metrics visualization and observability dashboards.</li>
+                <li>Prometheus – Metrics collection and monitoring.</li>
+                <li>Keycloak – Identity and Access Management (IAM).</li>
+                <li>PostgreSQL – Relational database.</li>
+                <li>Elasticsearch – Search and analytics engine.</li>
+                <li>Headlamp – Kubernetes web user interface.</li>
+                <li>NGINX Ingress Controller – Kubernetes ingress and traffic management.</li>
+            </ul>
+            <h3>
+                Attribution
+            </h3>
+            All product names, company names, logos, trademarks, service marks, and registered trademarks referenced within <b>c8-labs</b> remain the property of their respective owners and are used solely for identification and educational purposes.
+            <br/>
+        </section>
+
+        <hr/>
+    </main>    
+    <script src="../scripts/app.js"></script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', async () => { 
+            console.log('init load gallery...');
+            loadGallery();
+        } );
+    </script>
+</body>
+</html>
